@@ -40,21 +40,35 @@ function formatWorkDate(input: Date | string) {
   <BottomLayout>
     <ul class="p-0">
       {
-        work.map((entry) => (
-          <li class="animate p-0 border-b border-black/10 dark:border-white/25 mt-4 py-8 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none">
-            <div class="text-sm uppercase mb-4">
-              {formatWorkDate(entry.data.dateStart)} -{" "}
-              {formatWorkDate(entry.data.dateEnd)}
-            </div>
-            <div class="text-black dark:text-white font-semibold">
-              {entry.data.company}
-            </div>
-            <div class="text-sm font-semibold">{entry.data.role}</div>
-            <article class="prose dark:prose-invert">
-              <entry.Content />
-            </article>
-          </li>
-        ))
+        work.map((entry) => {
+          const { data } = entry;
+          const { dateStart, dateEnd, company, role, linkUrl } = data;
+          return (
+            <li class="animate p-0 border-b border-black/10 dark:border-white/25 mt-4 py-8 first-of-type:mt-0 first-of-type:pt-0 last-of-type:border-none">
+              <div class="text-sm uppercase mb-4">
+                {formatWorkDate(dateStart)} - {formatWorkDate(dateEnd)}
+              </div>
+              {linkUrl ? (
+                <a
+                  href={linkUrl}
+                  target="_blank"
+                  class="underline decoration-[.5px] decoration-black/25 dark:decoration-white/50 hover:decoration-black dark:hover:decoration-white text-black dark:text-white underline-offset-2 blend font-semibold"
+                >
+                  {company}
+                </a>
+              ) : (
+                <div class="text-black dark:text-white font-semibold">
+                  {company}
+                </div>
+              )}
+
+              <div class="text-sm font-semibold">{role}</div>
+              <article class="prose dark:prose-invert">
+                <entry.Content />
+              </article>
+            </li>
+          );
+        })
       }
     </ul>
   </BottomLayout>

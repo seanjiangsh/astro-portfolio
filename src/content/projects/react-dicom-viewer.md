@@ -30,7 +30,7 @@ It encompasses backend DICOM REST APIs (QIDO-RS, WADO-URI), along with essential
 ## Demo of basic operations:
 
 <video controls class="w-full">
-  <source src="/assets/Viewer Basic Operation.mp4" type="video/mp4">
+  <source src="/assets/viewer-basic-operations.mp4" type="video/mp4">
   Your browser does not support the video tag.
 </video>
 

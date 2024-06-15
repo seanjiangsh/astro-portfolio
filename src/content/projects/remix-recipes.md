@@ -10,7 +10,7 @@ tags:
   - AWS DynamoDB
 demoUrl: https://remix-recipes.sean-j.dev
 repoUrl: https://github.com/seanjiangsh/remix-recipes
-previewImage: remix-recipes.preview.png
+previewImage: remix-recipes.preview.jpg
 ---
 
 ## Description:
