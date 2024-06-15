@@ -11,7 +11,8 @@
     "preview:network": "astro dev --host",
     "astro": "astro",
     "lint": "eslint .",
-    "lint:fix": "eslint . --fix"
+    "lint:fix": "eslint . --fix",
+    "deploy": "npm run build && arc deploy --production"
   },
   "dependencies": {
     "@astrojs/check": "^0.7.0",
@@ -29,5 +30,8 @@
     "tailwind-merge": "^2.2.1",
     "tailwindcss": "^3.4.1",
     "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@architect/architect": "^11.0.13"
   }
 }

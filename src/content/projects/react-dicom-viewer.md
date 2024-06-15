@@ -29,17 +29,16 @@ It encompasses backend DICOM REST APIs (QIDO-RS, WADO-URI), along with essential
 
 ## Demo of basic operations:
 
-<video controls class="w-full">
-  <source src="/assets/viewer-basic-operations.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+<div style="position: relative; overflow: hidden; padding-top: 56.25%; width: 100%;">
+    <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" src="https://www.youtube.com/embed/W9wGj2S6sxI" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+</div>
 
 ## Main Features:
 
 - GET params for HIS call viewer (patient ID, accession Number, studydate range)
 - Customizable conditions/results for study querying
 - Adaptable and configurable for various screen sizes
-- Tree/Grid study overview sidebar (customizable to anchor on any side)
+- Tree/Grid study overview sidebar (customizable to anchor on any corner)
 - Drag-n-drop for overview to main grids
 - JPEG preview before DICOM loaded
 - Series/Image grid layouts

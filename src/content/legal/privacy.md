@@ -1,28 +1,46 @@
 ---
 title: "Privacy Policy"
-date: "03/07/2024"
+date: "2024-06-15"
 ---
 
-This Privacy Policy governs the manner in which [Your Company Name] collects, uses, maintains, and discloses information collected from users (each, a "User") of the [Your Website URL] website ("Site"). This privacy policy applies to the Site and all products and services offered by [Your Company Name].
+## Introduction
 
-#### Personal identification information
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+Welcome to Sean's portfolio ("I, "my"). I am committed to respecting your privacy. This privacy policy explains my practices regarding the collection, use, and protection of your personal information when you visit my website https://sean-j.dev.
 
-#### Non-personal identification information
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+### Data Collection
 
-#### Web browser cookies
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+I do not collect, or analyze any personal data from my visitors.
 
-#### How we use collected information
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+### Use of Data
 
-#### How we protect your information
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+Since I do not collect any personal data beyond authentication cookies, I do not use personal data for any other purpose.
 
-#### Sharing your personal information
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+### Data Sharing
 
-#### Changes to this privacy policy
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras sit amet massa ut neque consequat congue. Sed id ipsum vitae sem imperdiet suscipit. Nulla facilisi. Morbi quis nibh at nunc pulvinar rhoncus. Proin porttitor dapibus dolor, id fermentum urna eleifend et. In feugiat pretium erat nec vestibulum.
+As I do not collect or store any personal data, I do not share any personal data with third parties.
 
+### Data Security
+
+I am committed to ensuring that your information is secure. I only use cookies for authentication purposes and take appropriate measures to secure this information.
+
+### Cookies
+
+I do not track, analyze, or share data through cookies. However some of my demo projects uses cookies solely for user authentication purposes. These cookies are essential for the functionality of our website.
+
+You can set your browser to refuse cookies or to alert you when cookies are being sent. However, some parts of our website may not function properly without cookies.
+
+### Third-Party Links
+
+Our website may contain links to other websites. I am not responsible for the privacy practices of these other sites. I encourage you to read their privacy policies.
+
+### Children's Privacy
+
+Our website is not intended for children under the age of [13/16]. I do not knowingly collect personal information from children under this age.
+
+### Policy Changes
+
+I may update this privacy policy from time to time. Any changes will be posted on this page. You are advised to review this privacy policy periodically for any changes.
+
+### Contact Information
+
+If you have any questions or concerns about this privacy policy, please contact me at seanjiangsh@gmail.com
