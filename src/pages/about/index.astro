@@ -1,0 +1,28 @@
+---
+import { type CollectionEntry, getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import { formatDate } from "@lib/utils";
+import { ABOUT } from "@consts";
+
+const about = (await getCollection("about"))[0];
+const data = about as CollectionEntry<"about">;
+const { title, date } = data.data;
+const { Content } = await about.render();
+---
+
+<PageLayout title={title} description={`${title} for ${ABOUT.TITLE}`}>
+  <TopLayout>
+    <div class="animate">
+      <div class="page-heading">
+        {title}
+      </div>
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <article class="animate">
+      <Content />
+    </article>
+  </BottomLayout>
+</PageLayout>

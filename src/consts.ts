@@ -25,6 +25,11 @@ export const SEARCH: Page = {
   DESCRIPTION: "Search all posts and projects by keyword.",
 };
 
+export const ABOUT: Page = {
+  TITLE: "About",
+  DESCRIPTION: "About me.",
+};
+
 // Blog Page
 // export const BLOG: Page = {
 //   TITLE: "Blog",
@@ -44,6 +49,10 @@ export const LINKS: Links = [
   {
     TEXT: "Work",
     HREF: "/work",
+  },
+  {
+    TEXT: "About",
+    HREF: "/about",
   },
   // {
   //   TEXT: "Blog",
