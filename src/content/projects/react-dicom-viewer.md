@@ -23,7 +23,7 @@ tags:
 
 ## Description:
 
-This project entails a comprehensive DICOM image viewer capable of running on both browsers and clients, serving also as a DICOMDIR (CD) Viewer.
+This project entails a comprehensive DICOM image viewer capable of running on both browsers as DICOM web viewer or clients as a DICOMDIR (CD) viewer.
 
 It encompasses backend DICOM REST APIs (QIDO-RS, WADO-URI), along with essential features of a self-hosted web server (user control, authentication, RBAC, etc).
 
@@ -35,15 +35,15 @@ It encompasses backend DICOM REST APIs (QIDO-RS, WADO-URI), along with essential
 
 ## Main Features:
 
-- GET params for HIS call viewer (patient ID, accession Number, studydate range)
+- GET params for HIS call viewer (patient ID, accession number, study date range)
 - Customizable conditions/results for study querying
 - Adaptable and configurable for various screen sizes
-- Tree/Grid study overview sidebar (customizable to anchor on any corner)
-- Drag-n-drop for overview to main grids
+- Tree/Grid study overview sidebar (customizable to anchor on any side)
+- Drag-n-drop from overview to main grids
 - JPEG preview before DICOM loaded
 - Series/Image grid layouts
 - Series merge
-- Memorization of image status in each series layout
+- Memorization and restoration of image status of series grids
 - Basic imaging tools (W/L, Pan, Zoom, etc)
 - Annotation tools (Length, Angle, EllipticalROI, etc)
 - Text/Graphic overlay

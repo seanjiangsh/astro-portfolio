@@ -1,6 +1,7 @@
 ---
 company: "E-Web Co., Ltd"
 role: "Software Engineer"
+locationType: "On-Site"
 dateStart: "2019-04-01"
 dateEnd: "2020-06-30"
 linkUrl: "https://www.e-web.com.tw/en/home"

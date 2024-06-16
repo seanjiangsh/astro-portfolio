@@ -1,6 +1,7 @@
 ---
 company: "Rimage Corporation Taiwan Branch"
 role: "Software Engineer"
+locationType: "Hybrid"
 dateStart: "2020-07-01"
 dateEnd: "2021-12-31"
 linkUrl: "https://rimage-apac.com"
