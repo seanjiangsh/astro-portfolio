@@ -10,8 +10,8 @@ linkUrl: "https://www.e-web.com.tw/en/home"
 <br/>
 DICOM medical imaging development, installation, and maintenance, along with providing product introductions, user training, and detailed product documentation.
 
-- Developing and maintaining DICOM medical imaging applications using C++, MSSQL, and web technologies (HTML5, JavaScript, CSS)
-- Performing remote and on-site software installations and maintenance
-- Introducing products and providing user training for clients in South-East Asia
-- Creating comprehensive product documentation
-- Collaborating with clients to understand their needs, including system analysis and design
+- Developed and maintained DICOM medical imaging applications using C++, MSSQL, and web technologies (HTML5, JavaScript, CSS)
+- Performed remote and on-site software installations and maintenance
+- Introduced products and provided user training for clients in South-East Asia
+- Created comprehensive product documentation
+- Collaborated with clients to understand their needs, including system analysis and design

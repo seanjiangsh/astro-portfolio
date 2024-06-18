@@ -15,6 +15,6 @@ previewImage: remix-recipes.preview.jpg
 
 ## Description:
 
-A full-stack web application that provides users with an all-in-one chef experience where users can add recipes, create a meal plan, and generate a shopping list for your meals.
+A full-stack web application that provides users with an all-in-one chef experience, where users can add recipes, create a meal plan, and generate a shopping list for your meals.
 
 This project builds upon the [Remix Bootcamp: Zero to Mastery](https://zerotomastery.io/courses/learn-remix-run/) course, extending its scope. It utilizes the Architect framework for deployment on AWS Lambda and DynamoDB.

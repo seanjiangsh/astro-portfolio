@@ -15,6 +15,6 @@ previewImage: crwn-clothing.preview.jpg
 
 ## Description:
 
-A React project focused on practicing E-commerce functionalities, based on [ZTM-Complete React Developer](https://zerotomastery.io/courses/learn-react/) course.
+A React project focused on practicing E-commerce functionalities, based on the [ZTM-Complete React Developer](https://zerotomastery.io/courses/learn-react/) course.
 
 This project goes beyond the course, featuring a complete build with TypeScript and Vite, and leveraging AWS Lambda functions to create a full-stack website. It employs a CI/CD pipeline with Infrastructure as Code (IaC) to automate the deployment process.
