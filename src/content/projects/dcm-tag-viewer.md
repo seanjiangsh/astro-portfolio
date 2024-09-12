@@ -1,6 +1,6 @@
 ---
 title: "DICOM Tag Viewer"
-summary: "A simple tag viewer to display DICOM info in broswer"
+summary: "A viewer to display tag info or preview DICOM image in broswer"
 
 date: "Sep 12 2024"
 draft: false
