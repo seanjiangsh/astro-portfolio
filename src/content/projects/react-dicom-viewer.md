@@ -11,6 +11,7 @@ tags:
   - React
   - Node.js
   - Postgres
+  - CSR
 ---
 
 ---

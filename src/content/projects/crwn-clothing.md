@@ -8,6 +8,7 @@ tags:
   - Frontend
   - React
   - E-commerce
+  - CSR
 demoUrl: https://crwn-clothing.sean-j.dev
 repoUrl: https://github.com/seanjiangsh/crwn-clothing-v2
 previewImage: crwn-clothing.preview.jpg

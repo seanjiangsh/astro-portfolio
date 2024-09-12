@@ -8,6 +8,7 @@ tags:
   - Fullstack
   - Remix
   - AWS DynamoDB
+  - SSR
 demoUrl: https://remix-recipes.sean-j.dev
 repoUrl: https://github.com/seanjiangsh/remix-recipes
 previewImage: remix-recipes.preview.jpg

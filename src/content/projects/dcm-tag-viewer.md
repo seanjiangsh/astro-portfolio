@@ -2,24 +2,24 @@
 title: "DICOM Tag Viewer"
 summary: "A simple tag viewer to display DICOM info in broswer"
 
-date: "June 8 2024"
+date: "Sep 12 2024"
 draft: false
 tags:
-  - DICOM
   - Frontend
+  - DICOM
   - React
+  - CSR
 demoUrl: https://dcm-tag-viewer.sean-j.dev
 repoUrl: https://github.com/seanjiangsh/dcm-tag-viewer
----
-
----
-
-🚧 This project is still under construction 🚧
-
+previewImage: dcm-tag-viewer.preview.jpg
 ---
 
 ## Description:
 
-DICOM Tag Viewer is a user-friendly tool for displaying DICOM information in your browser. Users can simply drag-n-drop DICOM images to display tag info.
+Got some medical images in DICOM format and want to check the information or previewing image quickly? DICOM Tag Viewer is here to help!
 
-Using dynamic tables, it presents nested tag data, allowing users to search, expand, and filter columns as needed. The DICOM Tag Viewer also supports the DICOM SR (Structured Report) format. All operations are performed on the frontend, guaranteeing that no sensitive data leaves the browser.
+The DICOM Tag Viewer is a user-friendly tool for displaying DICOM information in your browser. Users can simply drag-n-drop DICOM images to display tag info.
+
+Using dynamic tables, it presents nested tag data, allowing users to search, expand, and filter columns as needed. The DICOM Tag Viewer also supports the DICOM SR (Structured Report) format.
+
+All operations are performed on the frontend, guaranteeing that no sensitive data leaves the browser.
