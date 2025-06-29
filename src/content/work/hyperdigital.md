@@ -1,9 +1,10 @@
 ---
-company: "A medical solution provider in Taiwan"
-role: "Fullstack developer"
+company: "Hyperdigital Tech"
+role: "Fullstack Developer"
 locationType: "Remote"
 dateStart: "2022-01-01"
-dateEnd: "Now"
+dateEnd: "2024-11-30"
+linkUrl: "https://www.horoview.com.tw"
 ---
 
 <br/>
@@ -14,5 +15,5 @@ A startup specializing in medical software solutions. My role encompasses planni
 - Designed and developed user access controls for APIs, including authentication, authorization, and role-based access control (RBAC).
 - Introduced containerized services for less resource consumption and easier management.
 - Database optimization for PACS, redesigned tables for better reusability.
-- Version control via git and Docker registry.
+- Version control via Git and Docker registry.
 - Created standardized documents for development workflow.
