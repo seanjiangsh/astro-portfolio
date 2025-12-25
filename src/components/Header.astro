@@ -8,10 +8,10 @@ import Container from "@components/Container.astro";
 
 <header id="header" class="fixed top-0 w-full h-16 z-50">
   <Container size="md">
-    <div class="relative h-full w-full">
-      <div
-        class="absolute left-0 top-1/2 -translate-y-1/2 flex gap-1 font-semibold"
-      >
+    <div
+      class="relative h-full w-full flex items-center justify-between md:grid md:grid-cols-[auto_1fr_auto] md:items-center"
+    >
+      <div class="flex gap-1 font-semibold items-center h-full">
         <a
           href="/"
           class="flex gap-1 text-current hover:text-black dark:hover:text-white transition-colors duration-300 ease-in-out"
@@ -23,8 +23,8 @@ import Container from "@components/Container.astro";
         </a>
       </div>
 
-      <div class="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
-        <nav class="hidden md:flex items-center justify-center text-sm gap-1">
+      <div class="hidden md:flex items-center justify-center">
+        <nav class="flex items-center justify-center text-sm gap-1">
           {
             LINKS.map((LINK) => (
               <a
@@ -45,7 +45,7 @@ import Container from "@components/Container.astro";
         </nav>
       </div>
 
-      <div class="buttons absolute right-0 top-1/2 -translate-y-1/2 flex gap-1">
+      <div class="buttons flex gap-1 justify-end items-center">
         <a
           href="/search"
           aria-label={`Search blog posts and projects on ${SITE.TITLE}`}

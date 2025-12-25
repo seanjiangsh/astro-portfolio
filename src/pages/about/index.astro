@@ -1,27 +1,40 @@
 ---
-import { type CollectionEntry, getCollection } from "astro:content";
 import PageLayout from "@layouts/PageLayout.astro";
 import TopLayout from "@layouts/TopLayout.astro";
 import BottomLayout from "@layouts/BottomLayout.astro";
+import AboutSlides from "@components/AboutSlides.astro";
 import { ABOUT } from "@consts";
 
-const about = (await getCollection("about"))[0];
-const data = about as CollectionEntry<"about">;
-const { title, date } = data.data;
-const { Content } = await about.render();
+const updated = new Date().toISOString().slice(0, 10);
 ---
 
-<PageLayout title={title} description={`${title} for ${ABOUT.TITLE}`}>
+<PageLayout title={ABOUT.TITLE} description={`About ${ABOUT.TITLE}`}>
   <TopLayout>
     <div class="animate">
-      <div class="page-heading">
-        {title}
+      <div class="page-heading">{ABOUT.TITLE}</div>
+      <div class="page-meta">
+        Updated: {updated} • Merry Christmas & Happy New Year
       </div>
     </div>
   </TopLayout>
   <BottomLayout>
     <article class="animate">
-      <Content />
+      <AboutSlides />
+      <p class="slide-hint">Navigate with arrow keys or the buttons.</p>
     </article>
   </BottomLayout>
 </PageLayout>
+
+<style>
+  .page-meta {
+    margin-top: 0.35rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+  }
+
+  .slide-hint {
+    margin-top: 0.75rem;
+    color: #94a3b8;
+    font-size: 0.9rem;
+  }
+</style>

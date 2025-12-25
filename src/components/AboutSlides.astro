@@ -1,0 +1,527 @@
+---
+import { slides } from "@lib/aboutSlides";
+
+const splitBullet = (text: string) =>
+  text.split(/(\[[^\]]+\])/).filter(Boolean);
+---
+
+<section class="about-slides" id="about-slides">
+  <header class="slides-top">
+    <div class="slides-count" data-count>1 / {slides.length}</div>
+    <button
+      class="slide-btn ghost"
+      type="button"
+      data-fullscreen
+      aria-label="Toggle fullscreen"
+    >
+      Fullscreen
+    </button>
+  </header>
+
+  <div class="slides-frame" data-frame>
+    {
+      slides.map((slide, index) => (
+        <article
+          class={`slide${index === 0 ? " is-active" : ""}`}
+          data-slide={index}
+        >
+          <div class="slide-title-row">
+            <p class="slide-title">{slide.title}</p>
+            {slide.headline && <p class="slide-headline">{slide.headline}</p>}
+          </div>
+          {slide.imageSrc && (
+            <figure class="slide-media">
+              <img
+                src={slide.imageSrc}
+                alt={slide.imageAlt ?? ""}
+                loading="lazy"
+              />
+              {slide.imageCaption && (
+                <figcaption class="slide-caption">
+                  {slide.imageCaption}
+                </figcaption>
+              )}
+            </figure>
+          )}
+          {slide.bullets && (
+            <ul class="slide-bullets">
+              {slide.bullets.map((item) =>
+                typeof item === "string" ? (
+                  <li>
+                    {splitBullet(item).map((part) =>
+                      part.startsWith("[") && part.endsWith("]") ? (
+                        <span class="bullet-chip">{part.slice(1, -1)}</span>
+                      ) : (
+                        part
+                      )
+                    )}
+                  </li>
+                ) : (
+                  <li>
+                    <span class="bullet-label">
+                      {splitBullet(item.text).map((part) =>
+                        part.startsWith("[") && part.endsWith("]") ? (
+                          <span class="bullet-chip">{part.slice(1, -1)}</span>
+                        ) : (
+                          part
+                        )
+                      )}
+                    </span>
+                    {item.children && (
+                      <ul class="slide-sub-bullets">
+                        {item.children.map((child) => (
+                          <li>
+                            {splitBullet(child).map((part) =>
+                              part.startsWith("[") && part.endsWith("]") ? (
+                                <span class="bullet-chip">
+                                  {part.slice(1, -1)}
+                                </span>
+                              ) : (
+                                part
+                              )
+                            )}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </li>
+                )
+              )}
+            </ul>
+          )}
+        </article>
+      ))
+    }
+  </div>
+
+  <div class="slides-controls">
+    <button
+      class="slide-btn"
+      type="button"
+      data-prev
+      aria-label="Previous slide"
+    >
+      Prev
+    </button>
+    <button
+      class="slide-btn primary"
+      type="button"
+      data-next
+      aria-label="Next slide"
+    >
+      Next
+    </button>
+  </div>
+
+  <div class="slides-progress" aria-hidden="true">
+    {
+      slides.map((_, index) => (
+        <span
+          class={`dot${index === 0 ? " is-active" : ""}`}
+          data-dot={index}
+        />
+      ))
+    }
+  </div>
+</section>
+
+<script>
+  const root = document.querySelector<HTMLElement>("#about-slides");
+  if (root) {
+    const slides = Array.from(
+      root.querySelectorAll<HTMLElement>("[data-slide]")
+    );
+    const dots = Array.from(root.querySelectorAll<HTMLElement>("[data-dot]"));
+    const count = root.querySelector<HTMLElement>("[data-count]");
+    const fullscreenBtn =
+      root.querySelector<HTMLButtonElement>("[data-fullscreen]");
+    let index = 0;
+
+    const setIndex = (next: number) => {
+      index = (next + slides.length) % slides.length;
+      slides.forEach((el, idx) =>
+        el.classList.toggle("is-active", idx === index)
+      );
+      dots.forEach((el, idx) =>
+        el.classList.toggle("is-active", idx === index)
+      );
+      if (count) count.textContent = `${index + 1} / ${slides.length}`;
+    };
+
+    const next = () => setIndex(index + 1);
+    const prev = () => setIndex(index - 1);
+
+    const nextBtn = root.querySelector<HTMLButtonElement>("[data-next]");
+    const prevBtn = root.querySelector<HTMLButtonElement>("[data-prev]");
+    nextBtn?.addEventListener("click", next);
+    prevBtn?.addEventListener("click", prev);
+
+    const syncFullscreenUi = () => {
+      const isNative = document.fullscreenElement === root;
+      const isFallback = root.dataset.fullscreenMode === "fallback";
+      const active = isNative || isFallback;
+
+      root.classList.toggle("is-fullscreen", active);
+      if (fullscreenBtn)
+        fullscreenBtn.textContent = active ? "Exit fullscreen" : "Fullscreen";
+    };
+
+    const enterFullscreen = async () => {
+      if (document.fullscreenEnabled && root.requestFullscreen) {
+        try {
+          root.dataset.fullscreenMode = "native";
+          await root.requestFullscreen();
+          return;
+        } catch (err) {
+          // fall back to in-page fullscreen styling
+        }
+      }
+      root.dataset.fullscreenMode = "fallback";
+      root.classList.add("is-fullscreen");
+      syncFullscreenUi();
+    };
+
+    const exitFullscreen = async () => {
+      if (document.fullscreenElement) {
+        try {
+          await document.exitFullscreen();
+        } catch (err) {
+          // ignore errors and ensure class cleanup below
+        }
+      }
+      root.dataset.fullscreenMode = "";
+      root.classList.remove("is-fullscreen");
+      syncFullscreenUi();
+    };
+
+    const toggleFullscreen = () => {
+      const active =
+        document.fullscreenElement === root ||
+        root.dataset.fullscreenMode === "fallback";
+      if (active) {
+        exitFullscreen();
+      } else {
+        enterFullscreen();
+      }
+    };
+
+    fullscreenBtn?.addEventListener("click", toggleFullscreen);
+    document.addEventListener("fullscreenchange", syncFullscreenUi);
+
+    dots.forEach((dot, idx) => {
+      dot.addEventListener("click", () => setIndex(idx));
+    });
+
+    const onKey = (event: KeyboardEvent) => {
+      if (event.key === "ArrowRight" || event.key === " ") {
+        event.preventDefault();
+        next();
+      }
+      if (event.key === "ArrowLeft") {
+        event.preventDefault();
+        prev();
+      }
+      if (event.key === "f" || event.key === "F") {
+        toggleFullscreen();
+      }
+      if (event.key === "Escape") {
+        if (root.dataset.fullscreenMode === "fallback") exitFullscreen();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+  }
+</script>
+
+<style>
+  .about-slides {
+    display: grid;
+    gap: 1.1rem;
+    padding: 1rem 1.1rem 1.25rem;
+    border-radius: 1rem;
+    background: linear-gradient(
+      145deg,
+      rgba(15, 23, 42, 0.85),
+      rgba(30, 41, 59, 0.85)
+    );
+    color: #e2e8f0;
+    box-shadow: 0 14px 48px rgba(0, 0, 0, 0.32);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .slides-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    gap: 0.75rem;
+  }
+
+  .slides-count {
+    font-size: 0.95rem;
+    color: #e2e8f0;
+    font-weight: 700;
+  }
+
+  .slides-frame {
+    position: relative;
+    min-height: 420px;
+  }
+
+  .slide {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    transform: translateY(18px);
+    transition:
+      opacity 320ms ease,
+      transform 320ms ease;
+    padding: 1.25rem;
+    border-radius: 1rem;
+    background: rgba(15, 23, 42, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    display: grid;
+    gap: 0.9rem;
+    will-change: opacity, transform;
+  }
+
+  .slide.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    position: relative;
+  }
+
+  .slide-title-row {
+    display: grid;
+    gap: 0.35rem;
+  }
+
+  .slide-title {
+    font-size: 1.3rem;
+    font-weight: 800;
+    color: #f8fafc;
+    margin: 0;
+  }
+
+  .slide-headline {
+    margin: 0;
+    color: #cbd5e1;
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+
+  .slide-bullets {
+    margin: 0;
+    padding-left: 1rem;
+    display: grid;
+    gap: 0.45rem;
+    color: #e2e8f0;
+    line-height: 1.6;
+    font-size: 1.02rem;
+  }
+
+  .slide-bullets li {
+    list-style: disc;
+  }
+
+  .bullet-label {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    font-weight: 700;
+    color: #f8fafc;
+  }
+
+  .slide-sub-bullets {
+    margin: 0.35rem 0 0.1rem;
+    padding-left: 1.1rem;
+    display: grid;
+    gap: 0.3rem;
+    color: #cbd5e1;
+    line-height: 1.5;
+    font-size: 0.98rem;
+  }
+
+  .slide-sub-bullets li {
+    list-style: circle;
+  }
+
+  .bullet-chip {
+    display: inline-flex;
+    align-items: flex-start;
+    gap: 0.35rem;
+    padding: 0.18rem 0.55rem;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.14);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #e2e8f0;
+    font-weight: 700;
+    line-height: 1.4;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.16);
+    white-space: normal;
+    flex-wrap: wrap;
+    text-align: left;
+  }
+
+  .bullet-chip::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(135deg, #06b6d4, #6366f1);
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+  }
+
+  .slide-media {
+    margin: 0;
+    display: grid;
+    border-radius: 0.75rem;
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(15, 23, 42, 0.45);
+  }
+
+  .slide-media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 260px;
+    object-fit: contain;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .slide-caption {
+    font-size: 0.9rem;
+    margin-top: 0;
+    padding: 0.25rem;
+    color: #94a3b8;
+    text-align: center;
+  }
+
+  .slides-controls {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+  }
+
+  .slide-btn {
+    padding: 0.55rem 0.9rem;
+    border-radius: 0.65rem;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(148, 163, 184, 0.08);
+    color: #e2e8f0;
+    font-weight: 600;
+    font-size: 0.92rem;
+    cursor: pointer;
+    transition:
+      transform 120ms ease,
+      background 120ms ease,
+      border-color 120ms ease;
+  }
+
+  .slide-btn:hover {
+    transform: translateY(-1px);
+    background: rgba(148, 163, 184, 0.18);
+    border-color: rgba(255, 255, 255, 0.18);
+  }
+
+  .slide-btn.primary {
+    background: linear-gradient(135deg, #06b6d4, #6366f1);
+    border: none;
+    color: #0b1224;
+    flex-shrink: 0;
+  }
+
+  .slide-btn.primary:hover {
+    background: linear-gradient(135deg, #22d3ee, #818cf8);
+    color: #0b1224;
+  }
+
+  .slide-btn.ghost {
+    background: rgba(148, 163, 184, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    color: #e2e8f0;
+    padding: 0.45rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .slides-progress {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
+    gap: 0.35rem;
+  }
+
+  .dot {
+    height: 6px;
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.35);
+    transition:
+      background 220ms ease,
+      transform 220ms ease;
+    cursor: pointer;
+  }
+
+  .dot.is-active {
+    background: linear-gradient(135deg, #06b6d4, #6366f1);
+    transform: translateY(-1px);
+  }
+
+  .about-slides.is-fullscreen {
+    position: fixed;
+    inset: 0;
+    z-index: 40;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+    background: linear-gradient(
+      145deg,
+      rgba(15, 23, 42, 0.95),
+      rgba(30, 41, 59, 0.95)
+    );
+    border-radius: 0;
+    padding: 0.75rem;
+    gap: 0.75rem;
+  }
+
+  .about-slides.is-fullscreen .slides-frame {
+    min-height: 0;
+    height: 100%;
+  }
+
+  .about-slides.is-fullscreen .slide {
+    padding: 1.6rem;
+    border-radius: 0.9rem;
+  }
+
+  .about-slides.is-fullscreen .slide-title {
+    font-size: 1.6rem;
+  }
+
+  .about-slides.is-fullscreen .slide-headline {
+    font-size: 1.18rem;
+  }
+
+  .about-slides.is-fullscreen .slide-bullets {
+    font-size: 1.12rem;
+  }
+
+  .about-slides.is-fullscreen .slide-media img {
+    max-height: min(52vh, 520px);
+  }
+
+  .about-slides.is-fullscreen .slides-controls {
+    display: none;
+  }
+
+  .about-slides.is-fullscreen .slides-progress {
+    display: none;
+  }
+
+  @media (max-width: 768px) {
+    .about-slides {
+      padding: 1rem;
+    }
+    .slides-frame {
+      min-height: 360px;
+    }
+  }
+</style>

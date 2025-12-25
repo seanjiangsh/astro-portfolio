@@ -1,0 +1,26 @@
+---
+import { getCollection } from "astro:content";
+import PageLayout from "@layouts/PageLayout.astro";
+import TopLayout from "@layouts/TopLayout.astro";
+import BottomLayout from "@layouts/BottomLayout.astro";
+import { STACKS } from "@consts";
+
+const stacks = (await getCollection("stacks"))[0];
+const { Content } = await stacks.render();
+---
+
+<PageLayout title={STACKS.TITLE} description={STACKS.DESCRIPTION}>
+  <TopLayout>
+    <div class="animate">
+      <div class="page-heading">
+        {STACKS.TITLE}
+      </div>
+      <p class="page-subtitle">Technical stacks and certifications</p>
+    </div>
+  </TopLayout>
+  <BottomLayout>
+    <article class="animate">
+      <Content />
+    </article>
+  </BottomLayout>
+</PageLayout>

@@ -19,6 +19,11 @@ export const WORK: Page = {
   DESCRIPTION: "Places I have worked.",
 };
 
+export const STACKS: Page = {
+  TITLE: "Stacks",
+  DESCRIPTION: "Technical stacks and certifications.",
+};
+
 // Search Page
 export const SEARCH: Page = {
   TITLE: "Search",
@@ -49,6 +54,10 @@ export const LINKS: Links = [
   {
     TEXT: "Work",
     HREF: "/work",
+  },
+  {
+    TEXT: "Stacks",
+    HREF: "/stacks",
   },
   {
     TEXT: "About",
