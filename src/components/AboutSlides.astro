@@ -9,7 +9,7 @@ const splitBullet = (text: string) =>
   <header class="slides-top">
     <div class="slides-count" data-count>1 / {slides.length}</div>
     <button
-      class="slide-btn ghost"
+      class="slide-btn ghost fullscreen-btn"
       type="button"
       data-fullscreen
       aria-label="Toggle fullscreen"
@@ -135,7 +135,23 @@ const splitBullet = (text: string) =>
     const count = root.querySelector<HTMLElement>("[data-count]");
     const fullscreenBtn =
       root.querySelector<HTMLButtonElement>("[data-fullscreen]");
+    const pressEvent = "PointerEvent" in window ? "pointerup" : "click";
     let index = 0;
+    let previousOverflow: string | null = null;
+
+    const lockScroll = () => {
+      if (previousOverflow === null) {
+        previousOverflow = document.documentElement.style.overflow || "";
+      }
+      document.documentElement.style.overflow = "hidden";
+    };
+
+    const unlockScroll = () => {
+      if (previousOverflow !== null) {
+        document.documentElement.style.overflow = previousOverflow;
+        previousOverflow = null;
+      }
+    };
 
     const setIndex = (next: number) => {
       index = (next + slides.length) % slides.length;
@@ -151,10 +167,18 @@ const splitBullet = (text: string) =>
     const next = () => setIndex(index + 1);
     const prev = () => setIndex(index - 1);
 
+    const bindPress = (btn: HTMLButtonElement | null, handler: () => void) => {
+      if (!btn) return;
+      btn.addEventListener(pressEvent, (event) => {
+        event.preventDefault();
+        handler();
+      });
+    };
+
     const nextBtn = root.querySelector<HTMLButtonElement>("[data-next]");
     const prevBtn = root.querySelector<HTMLButtonElement>("[data-prev]");
-    nextBtn?.addEventListener("click", next);
-    prevBtn?.addEventListener("click", prev);
+    bindPress(nextBtn, next);
+    bindPress(prevBtn, prev);
 
     const syncFullscreenUi = () => {
       const isNative = document.fullscreenElement === root;
@@ -164,6 +188,11 @@ const splitBullet = (text: string) =>
       root.classList.toggle("is-fullscreen", active);
       if (fullscreenBtn)
         fullscreenBtn.textContent = active ? "Exit fullscreen" : "Fullscreen";
+      if (active) {
+        lockScroll();
+      } else {
+        unlockScroll();
+      }
     };
 
     const enterFullscreen = async () => {
@@ -177,7 +206,6 @@ const splitBullet = (text: string) =>
         }
       }
       root.dataset.fullscreenMode = "fallback";
-      root.classList.add("is-fullscreen");
       syncFullscreenUi();
     };
 
@@ -190,7 +218,6 @@ const splitBullet = (text: string) =>
         }
       }
       root.dataset.fullscreenMode = "";
-      root.classList.remove("is-fullscreen");
       syncFullscreenUi();
     };
 
@@ -235,6 +262,7 @@ const splitBullet = (text: string) =>
 <style>
   .about-slides {
     display: grid;
+    grid-template-rows: auto 1fr auto auto;
     gap: 1.1rem;
     padding: 1rem 1.1rem 1.25rem;
     border-radius: 1rem;
@@ -251,14 +279,22 @@ const splitBullet = (text: string) =>
   .slides-top {
     display: flex;
     justify-content: space-between;
-    align-items: start;
+    align-items: center;
     gap: 0.75rem;
+    position: relative;
+    z-index: 4;
   }
 
   .slides-count {
     font-size: 0.95rem;
     color: #e2e8f0;
     font-weight: 700;
+  }
+
+  .fullscreen-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
   }
 
   .slides-frame {
@@ -400,7 +436,10 @@ const splitBullet = (text: string) =>
   .slides-controls {
     display: flex;
     justify-content: flex-end;
+    align-items: center;
     gap: 0.5rem;
+    position: relative;
+    z-index: 4;
   }
 
   .slide-btn {
@@ -412,6 +451,9 @@ const splitBullet = (text: string) =>
     font-weight: 600;
     font-size: 0.92rem;
     cursor: pointer;
+    touch-action: manipulation;
+    position: relative;
+    z-index: 4;
     transition:
       transform 120ms ease,
       background 120ms ease,
@@ -448,6 +490,8 @@ const splitBullet = (text: string) =>
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(10px, 1fr));
     gap: 0.35rem;
+    position: relative;
+    z-index: 3;
   }
 
   .dot {
@@ -471,7 +515,10 @@ const splitBullet = (text: string) =>
     z-index: 40;
     width: 100vw;
     height: 100vh;
-    overflow: hidden;
+    height: 100dvh;
+    max-height: 100dvh;
+    overflow: auto;
+    grid-template-rows: auto 1fr auto auto;
     background: linear-gradient(
       145deg,
       rgba(15, 23, 42, 0.95),
@@ -485,11 +532,19 @@ const splitBullet = (text: string) =>
   .about-slides.is-fullscreen .slides-frame {
     min-height: 0;
     height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .about-slides.is-fullscreen .slide {
     padding: 1.6rem;
     border-radius: 0.9rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    justify-content: center;
+    align-items: flex-start;
   }
 
   .about-slides.is-fullscreen .slide-title {
@@ -508,17 +563,37 @@ const splitBullet = (text: string) =>
     max-height: min(52vh, 520px);
   }
 
-  .about-slides.is-fullscreen .slides-controls {
-    display: none;
-  }
-
-  .about-slides.is-fullscreen .slides-progress {
-    display: none;
-  }
-
   @media (max-width: 768px) {
     .about-slides {
       padding: 1rem;
+      gap: 0.75rem;
+    }
+    .slides-top {
+      display: none;
+    }
+    .fullscreen-btn {
+      display: none;
+    }
+    .slides-controls {
+      order: -1;
+      position: sticky;
+      top: 0;
+      margin: 0 -0.2rem;
+      padding: 0.4rem 0.2rem;
+      backdrop-filter: blur(6px);
+      z-index: 6;
+    }
+    .slides-progress {
+      order: -1;
+      position: sticky;
+      top: 3.1rem;
+      background: linear-gradient(
+        180deg,
+        rgba(15, 23, 42, 0.9) 0%,
+        rgba(15, 23, 42, 0.85) 100%
+      );
+      padding: 0.35rem 0.15rem;
+      z-index: 5;
     }
     .slides-frame {
       min-height: 360px;

@@ -151,6 +151,6 @@ export const slides: Slide[] = [
   {
     title: "Thank You",
     headline:
-      "Thanks for reading, happy to chat further or share more details.",
+      "Thanks for reading. I am happy to discuss further and share more details.",
   },
 ];
