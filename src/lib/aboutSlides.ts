@@ -26,10 +26,10 @@ export const slides: Slide[] = [
       {
         text: "Timeline",
         children: [
-          "2006-2010: Bachelor's in Information Management",
-          "2010-2018: Engine/mechanical industry",
-          "2018-2024: Medical software (DICOM)",
           "2024-present: Web gaming frontend",
+          "2018-2024: Medical software (DICOM)",
+          "2010-2018: Engine/mechanical industry",
+          "2006-2010: Bachelor's in Information Management",
         ],
       },
       "Different domains, same core strengths: diagnostics, systems thinking, and performance fine tuning",
@@ -92,10 +92,12 @@ export const slides: Slide[] = [
     ],
   },
   {
-    title: "Current Role: Frontend Team Lead",
+    title: "Current Role: Frontend Engineering Manager",
     headline: "Web gaming",
     bullets: [
       "Lead frontend delivery while remaining hands-on with performance-critical UI",
+      "Led a 3-month migration of core game components from element-based UI to canvas-based components under an extremely tight timeline",
+      "Improved scalability for upcoming raster and vector-based animation features",
       "Coordinate tasks, priorities, and collaboration between frontend engineers and designers",
       "Set technical direction for rendering, performance, and maintainable React/Pixi.js architecture",
     ],
